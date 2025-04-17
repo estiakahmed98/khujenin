@@ -5,7 +5,7 @@ import { MessageCircle } from "lucide-react";
 export default function ProductCard({ product }) {
   const { id, name, price, imageUrl, category } = product;
 
-  const whatsappLink = `https://wa.me/8801XXXXXXXXX?text=Hi! I want to buy ${name} from Khuje Nin.`;
+  const whatsappLink = `https://wa.me/+8801616367606?text=Hi! I want to buy ${name} from Khuje Nin.`;
 
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all">

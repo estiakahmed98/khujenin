@@ -82,6 +82,14 @@ export default function Header() {
           >
             Contact
           </Link>
+          <a
+            href="https://wa.me/+8801616367606?text=Hello%20Khuje%20Nin!%20I%20am%20interested%20in%20your%20products."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition"
+          >
+            WhatsApp
+          </a>
         </nav>
 
         {/* Mobile Hamburger */}
@@ -145,6 +153,14 @@ export default function Header() {
           >
             Contact
           </Link>
+          <a
+            href="https://wa.me/+8801616367606?text=Hello%20Khuje%20Nin!%20I%20am%20interested%20in%20your%20products."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block py-2 text-white bg-green-600 text-center rounded mt-2"
+          >
+            WhatsApp
+          </a>
         </div>
       )}
     </header>

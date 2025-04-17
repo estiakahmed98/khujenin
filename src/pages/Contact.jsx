@@ -14,12 +14,12 @@ export default function Contact() {
         <div>
           <span className="font-semibold text-green-700">WhatsApp:</span>{" "}
           <a
-            href="https://wa.me/8801XXXXXXXXX"
+            href="https://wa.me/+8801616367606"
             className="underline hover:text-green-600"
             target="_blank"
             rel="noopener noreferrer"
           >
-            +8801XXXXXXXXX
+            +8801616367606
           </a>
         </div>
 

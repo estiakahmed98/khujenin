@@ -3,7 +3,7 @@ import { MessageCircle } from "lucide-react";
 
 export default function WhatsAppButton({ productName }) {
   // 🔁 Replace the phone number below with your actual WhatsApp number in international format
-  const whatsappNumber = "8801XXXXXXXXX";
+  const whatsappNumber = "+8801616367606";
 
   const message = `Hi! I want to buy ${productName} from Khuje Nin.`;
   const encodedMessage = encodeURIComponent(message);

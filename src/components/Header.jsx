@@ -1,0 +1,110 @@
+import { useState } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
+
+const categories = [
+  "Honey",
+  "Ghee",
+  "Dates",
+  "Mustard Oil",
+  "Molasses",
+  "Masala",
+  "ভাই ভাই মধু ঘর",
+  "Seba Foods",
+  "Natural Foods",
+  "সিরাজগঞ্জ সরিষা মিল",
+];
+
+export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  return (
+    <header className="bg-white shadow-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <div className="flex items-center space-x-2">
+          <img src="/logo.png" alt="Khuje Nin Logo" width={40} height={40} />
+          <p className="text-xl font-bold text-green-700">Khuje Nin</p>
+        </div>
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex space-x-6 items-center">
+          <a href="/" className="hover:text-green-600">
+            Home
+          </a>
+          <div className="relative">
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-1 hover:text-green-600"
+            >
+              Category <ChevronDown size={16} />
+            </button>
+            {dropdownOpen && (
+              <div className="absolute top-full left-0 bg-white border mt-2 rounded shadow-md w-48 z-10">
+                {categories.map((cat, index) => (
+                  <a
+                    key={index}
+                    href={`/category/${cat}`}
+                    className="block px-4 py-2 hover:bg-green-100 text-sm"
+                  >
+                    {cat}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+          <a href="/about" className="hover:text-green-600">
+            About
+          </a>
+          <a href="/contact" className="hover:text-green-600">
+            Contact
+          </a>
+        </nav>
+
+        {/* Mobile Hamburger */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden text-green-700"
+        >
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-white px-4 pb-4">
+          <a href="/" className="block py-2">
+            Home
+          </a>
+          <div className="py-2">
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="w-full text-left flex items-center justify-between"
+            >
+              Category <ChevronDown size={16} />
+            </button>
+            {dropdownOpen && (
+              <div className="pl-4 pt-2">
+                {categories.map((cat, index) => (
+                  <a
+                    key={index}
+                    href={`/category/${cat}`}
+                    className="block py-1 text-sm"
+                  >
+                    {cat}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+          <a href="/about" className="block py-2">
+            About
+          </a>
+          <a href="/contact" className="block py-2">
+            Contact
+          </a>
+        </div>
+      )}
+    </header>
+  );
+}

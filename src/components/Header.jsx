@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { useLocation, Link } from "react-router-dom";
 
 const categories = [
   "Honey",
@@ -17,6 +18,9 @@ const categories = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (href) => location.pathname === href;
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
@@ -29,36 +33,55 @@ export default function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-6 items-center">
-          <a href="/" className="hover:text-green-600">
+          <Link
+            to="/"
+            className={`hover:text-green-600 ${
+              isActive("/") ? "text-green-700 font-semibold" : ""
+            }`}
+          >
             Home
-          </a>
+          </Link>
           <div className="relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 hover:text-green-600"
+              className={`flex items-center gap-1 hover:text-green-600 ${
+                location.pathname.startsWith("/category")
+                  ? "text-green-700 font-semibold"
+                  : ""
+              }`}
             >
               Category <ChevronDown size={16} />
             </button>
             {dropdownOpen && (
               <div className="absolute top-full left-0 bg-white border mt-2 rounded shadow-md w-48 z-10">
                 {categories.map((cat, index) => (
-                  <a
+                  <Link
                     key={index}
-                    href={`/category/${cat}`}
+                    to={`/category/${cat}`}
                     className="block px-4 py-2 hover:bg-green-100 text-sm"
                   >
                     {cat}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
           </div>
-          <a href="/about" className="hover:text-green-600">
+          <Link
+            to="/about"
+            className={`hover:text-green-600 ${
+              isActive("/about") ? "text-green-700 font-semibold" : ""
+            }`}
+          >
             About
-          </a>
-          <a href="/contact" className="hover:text-green-600">
+          </Link>
+          <Link
+            to="/contact"
+            className={`hover:text-green-600 ${
+              isActive("/contact") ? "text-green-700 font-semibold" : ""
+            }`}
+          >
             Contact
-          </a>
+          </Link>
         </nav>
 
         {/* Mobile Hamburger */}
@@ -73,36 +96,55 @@ export default function Header() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white px-4 pb-4">
-          <a href="/" className="block py-2">
+          <Link
+            to="/"
+            className={`block py-2 ${
+              isActive("/") ? "text-green-700 font-semibold" : ""
+            }`}
+          >
             Home
-          </a>
+          </Link>
           <div className="py-2">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="w-full text-left flex items-center justify-between"
+              className={`w-full text-left flex items-center justify-between ${
+                location.pathname.startsWith("/category")
+                  ? "text-green-700 font-semibold"
+                  : ""
+              }`}
             >
               Category <ChevronDown size={16} />
             </button>
             {dropdownOpen && (
               <div className="pl-4 pt-2">
                 {categories.map((cat, index) => (
-                  <a
+                  <Link
                     key={index}
-                    href={`/category/${cat}`}
+                    to={`/category/${cat}`}
                     className="block py-1 text-sm"
                   >
                     {cat}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
           </div>
-          <a href="/about" className="block py-2">
+          <Link
+            to="/about"
+            className={`block py-2 ${
+              isActive("/about") ? "text-green-700 font-semibold" : ""
+            }`}
+          >
             About
-          </a>
-          <a href="/contact" className="block py-2">
+          </Link>
+          <Link
+            to="/contact"
+            className={`block py-2 ${
+              isActive("/contact") ? "text-green-700 font-semibold" : ""
+            }`}
+          >
             Contact
-          </a>
+          </Link>
         </div>
       )}
     </header>

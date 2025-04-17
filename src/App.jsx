@@ -6,6 +6,7 @@ import CategoryProducts from "./pages/CategoryProducts";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -21,9 +22,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
 
-        <footer className="text-center py-4 mt-10 bg-gray-200">
-          <p>&copy; 2025 Khuje Nin. All Rights Reserved.</p>
-        </footer>
+        <Footer />
       </div>
     </Router>
   );

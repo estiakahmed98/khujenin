@@ -24,12 +24,30 @@ export default function Header() {
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo */}
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between md:justify-between">
+        {/* Mobile Layout: Left - Logo */}
         <div className="flex items-center space-x-2">
           <img src="/logo.png" alt="Khuje Nin Logo" width={40} height={40} />
           <p className="text-xl font-bold text-green-700">Khuje Nin</p>
         </div>
+
+        {/* Mobile Layout: Center - Add Post (hidden on md+) */}
+        <a
+          href="https://wa.me/+8801616367606?text=Hello%20খুঁজে%20নিন!%20আমি%20ওয়েবসাইট%20আমার%20পণ্য%20পোস্ট%20করতে%20চাই।"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="md:hidden bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm"
+        >
+          + Add a Post
+        </a>
+
+        {/* Mobile Layout: Right - Hamburger */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden text-green-700"
+        >
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-6 items-center">
@@ -83,22 +101,14 @@ export default function Header() {
             Contact
           </Link>
           <a
-            href="https://wa.me/+8801616367606?text=Hello%20Khuje%20Nin!%20I%20am%20interested%20in%20your%20products."
+            href="https://wa.me/+8801616367606?text=Hello%20খুঁজে%20নিন!%20আমি%20ওয়েবসাইট%20আমার%20পণ্য%20পোস্ট%20করতে%20চাই।"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition"
           >
-            WhatsApp
+            + Add a Post
           </a>
         </nav>
-
-        {/* Mobile Hamburger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-green-700"
-        >
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
       </div>
 
       {/* Mobile Menu */}
@@ -154,12 +164,12 @@ export default function Header() {
             Contact
           </Link>
           <a
-            href="https://wa.me/+8801616367606?text=Hello%20Khuje%20Nin!%20I%20am%20interested%20in%20your%20products."
+            href="https://wa.me/+8801616367606?text=Hello%20খুঁজে%20নিন!%20আমি%20ওয়েবসাইট%20আমার%20পণ্য%20পোস্ট%20করতে%20চাই।"
             target="_blank"
             rel="noopener noreferrer"
             className="block py-2 text-white bg-green-600 text-center rounded mt-2"
           >
-            WhatsApp
+            + Add a Post
           </a>
         </div>
       )}

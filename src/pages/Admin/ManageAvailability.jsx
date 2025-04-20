@@ -1,10 +1,9 @@
-jsx
-import React, { useState, useEffect } from 'react';
-import AdminService from '../../firebase/adminService';
+import React, { useState, useEffect } from "react";
+import AdminService from "../../firebase/adminService";
 
 function ManageAvailability() {
   const [availabilities, setAvailabilities] = useState([]);
-  const [availabilityName, setAvailabilityName] = useState('');
+  const [availabilityName, setAvailabilityName] = useState("");
   const [selectedAvailability, setSelectedAvailability] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const adminService = new AdminService();
@@ -12,12 +11,12 @@ function ManageAvailability() {
   const handleCreateAvailability = async () => {
     try {
       await adminService.createAvailability({ name: availabilityName });
-      setAvailabilityName('');
+      setAvailabilityName("");
       setSelectedAvailability(null);
       toggleModal();
       handleGetAllAvailability();
     } catch (error) {
-      console.error('Error creating availability:', error);
+      console.error("Error creating availability:", error);
     }
   };
 
@@ -27,19 +26,21 @@ function ManageAvailability() {
       setSelectedAvailability(availability);
       setAvailabilityName(availability.name);
     } catch (error) {
-      console.error('Error getting availability:', error);
+      console.error("Error getting availability:", error);
     }
   };
 
   const handleUpdateAvailability = async () => {
     try {
-      await adminService.updateAvailability(selectedAvailability.id, { name: availabilityName });
-      setAvailabilityName('');
+      await adminService.updateAvailability(selectedAvailability.id, {
+        name: availabilityName,
+      });
+      setAvailabilityName("");
       setSelectedAvailability(null);
       toggleModal();
       handleGetAllAvailability();
     } catch (error) {
-      console.error('Error updating availability:', error);
+      console.error("Error updating availability:", error);
     }
   };
 
@@ -48,7 +49,7 @@ function ManageAvailability() {
       await adminService.deleteAvailability(id);
       handleGetAllAvailability();
     } catch (error) {
-      console.error('Error deleting availability:', error);
+      console.error("Error deleting availability:", error);
     }
   };
 
@@ -57,7 +58,7 @@ function ManageAvailability() {
       const availabilitiesData = await adminService.getAllAvailability();
       setAvailabilities(availabilitiesData);
     } catch (error) {
-      console.error('Error getting availabilities:', error);
+      console.error("Error getting availabilities:", error);
       setAvailabilities([]);
     }
   };
@@ -82,15 +83,26 @@ function ManageAvailability() {
         }}
         className="availability-form"
       >
-        <input type="text" placeholder="Availability Name" value={availabilityName} onChange={(e) => setAvailabilityName(e.target.value)} />
-        <button type="submit">{selectedAvailability === null ? 'Create Availability' : 'Update Availability'}</button>
+        <input
+          type="text"
+          placeholder="Availability Name"
+          value={availabilityName}
+          onChange={(e) => setAvailabilityName(e.target.value)}
+        />
+        <button type="submit">
+          {selectedAvailability === null
+            ? "Create Availability"
+            : "Update Availability"}
+        </button>
       </form>
 
       {/* Modal */}
       {isModalOpen && selectedAvailability && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close-button" onClick={toggleModal}>&times;</span>
+            <span className="close-button" onClick={toggleModal}>
+              &times;
+            </span>
             <h3>Update Availability</h3>
             <form
               onSubmit={(e) => {
@@ -98,7 +110,12 @@ function ManageAvailability() {
                 handleUpdateAvailability();
               }}
             >
-                <input type="text" placeholder="Availability Name" value={availabilityName} onChange={(e) => setAvailabilityName(e.target.value)} />
+              <input
+                type="text"
+                placeholder="Availability Name"
+                value={availabilityName}
+                onChange={(e) => setAvailabilityName(e.target.value)}
+              />
               <button type="submit">Update Availability</button>
             </form>
           </div>
@@ -119,9 +136,27 @@ function ManageAvailability() {
               <td>{availability.id}</td>
               <td>{availability.name}</td>
               <td className="action-column">
-                <button onClick={() => { handleGetAvailability(availability.id); toggleModal() }}>Get</button>
-                <button onClick={() => { handleGetAvailability(availability.id); toggleModal() }}>Update</button>
-                <button onClick={() => handleDeleteAvailability(availability.id)}>Delete</button>
+                <button
+                  onClick={() => {
+                    handleGetAvailability(availability.id);
+                    toggleModal();
+                  }}
+                >
+                  Get
+                </button>
+                <button
+                  onClick={() => {
+                    handleGetAvailability(availability.id);
+                    toggleModal();
+                  }}
+                >
+                  Update
+                </button>
+                <button
+                  onClick={() => handleDeleteAvailability(availability.id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

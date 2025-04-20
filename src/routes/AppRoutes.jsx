@@ -1,3 +1,4 @@
+// routes/AppRoutes.jsx
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
@@ -14,6 +15,10 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/product/:id" element={<ProductDetails />} />
+      <Route path="/category/:categoryId" element={<CategoryProducts />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/admin/manage-products" element={<ManageProducts />} />
       <Route path="/admin/manage-categories" element={<ManageCategories />} />
@@ -21,10 +26,6 @@ const AppRoutes = () => {
         path="/admin/manage-availability"
         element={<ManageAvailability />}
       />
-      <Route path="/product/:id" element={<ProductDetails />} />
-      <Route path="/category/:category" element={<CategoryProducts />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
     </Routes>
   );
 };

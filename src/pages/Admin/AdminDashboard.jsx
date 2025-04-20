@@ -1,6 +1,5 @@
-jsx
-import React, { useState, useEffect } from 'react';
-import AdminService from '../../firebase/adminService';
+import React, { useState, useEffect } from "react";
+import AdminService from "../../firebase/adminService";
 
 const AdminDashboard = () => {
   const [products, setProducts] = useState([]);
@@ -16,7 +15,7 @@ const AdminDashboard = () => {
         setProducts(productsData);
         setCategories(categoriesData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -43,7 +42,13 @@ const AdminDashboard = () => {
         {categories.map((category) => (
           <div key={category.id}>
             <h3>{category.name}</h3>
-            <ul>{products.filter((product) => product.category === category.name).map((product) => (<li key={product.id}>{product.name}</li>))}</ul>
+            <ul>
+              {products
+                .filter((product) => product.category === category.name)
+                .map((product) => (
+                  <li key={product.id}>{product.name}</li>
+                ))}
+            </ul>
           </div>
         ))}
       </section>

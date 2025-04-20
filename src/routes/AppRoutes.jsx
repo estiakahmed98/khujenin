@@ -15,6 +15,12 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/admin/manage-products" element={<ManageProducts />} />
+      <Route path="/admin/manage-categories" element={<ManageCategories />} />
+      <Route
+        path="/admin/manage-availability"
+        element={<ManageAvailability />}
+      />
       <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/category/:category" element={<CategoryProducts />} />
       <Route path="/about" element={<About />} />

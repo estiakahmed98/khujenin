@@ -1,17 +1,14 @@
-import { db, storage } from "./config"; // Import Firestore and Firebase Storage
+import { db } from "./config";
 import {
   collection,
   getDocs,
   addDoc,
   updateDoc,
-  deleteDoc,
-  doc,
+  deleteDoc, 
+  doc
 } from "firebase/firestore";
 
-// Firestore collection reference for products
 const productsCollection = collection(db, "products");
-
-// Fetch all products from Firestore
 export const getAllProducts = async () => {
   try {
     const querySnapshot = await getDocs(productsCollection);
@@ -26,7 +23,6 @@ export const getAllProducts = async () => {
   }
 };
 
-// Add a new product to Firestore
 export const addProduct = async (productData) => {
   try {
     const docRef = await addDoc(productsCollection, productData);
@@ -37,7 +33,6 @@ export const addProduct = async (productData) => {
   }
 };
 
-// Update an existing product in Firestore
 export const updateProduct = async (id, updatedData) => {
   try {
     const productDoc = doc(db, "products", id);
@@ -49,7 +44,16 @@ export const updateProduct = async (id, updatedData) => {
   }
 };
 
-// Delete a product from Firestore
+export const getProduct = async (productId) => {
+  try {
+    const productDoc = doc(db, "products", productId);
+    const docSnap = await getDoc(productDoc);
+    return { ...docSnap.data(), id: docSnap.id };
+  } catch (error) {
+    console.error("Error getting product:", error);
+    throw error;
+  }
+};
 export const deleteProduct = async (id) => {
   try {
     const productDoc = doc(db, "products", id);

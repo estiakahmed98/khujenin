@@ -1,34 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getAllProducts } from "../firebase/productService"; // Corrected import path
+import { getProduct } from "../firebase/productService";
 import ProductCard from "../components/ProductCard";
+import RelatedProducts from "../components/RelatedProducts";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
+        setLoading(true)
       try {
-        const products = await getAllProducts();
-        const selectedProduct = products.find((prod) => prod.id === id);
-        setProduct(selectedProduct);
-
-        const related = products.filter(
-          (prod) =>
-            prod.categoryId === selectedProduct.categoryId && prod.id !== id
-        );
-        setRelatedProducts(related);
+        const productData = await getProduct(id);
+        setProduct(productData);
       } catch (error) {
         console.error("Error fetching product details:", error);
+      }
+      finally{
+        setLoading(false)
       }
     };
 
     fetchProductDetails();
   }, [id]);
 
-  if (!product) {
+  if (loading) {
     return <p>Loading product details...</p>;
   }
 
@@ -36,7 +34,7 @@ export default function ProductDetails() {
     <div className="max-w-6xl mx-auto p-4">
       <div className="flex flex-col sm:flex-row items-center">
         <img
-          src={product.image}
+          src={product.imageUrl ? product.imageUrl : "/logo.png"}
           alt={product.name}
           className="w-1/2 sm:w-1/3 mb-4 sm:mb-0"
         />
@@ -44,17 +42,11 @@ export default function ProductDetails() {
           <h1 className="text-3xl font-bold">{product.name}</h1>
           <p className="text-xl text-gray-700 mt-2">{product.description}</p>
           <p className="text-xl font-semibold text-green-700 mt-4">
-            ${product.price}
+            {product.price}
           </p>
         </div>
       </div>
-
-      <h2 className="text-2xl font-bold mt-8">Related Products</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
-        {relatedProducts.map((relatedProduct) => (
-          <ProductCard key={relatedProduct.id} product={relatedProduct} />
-        ))}
+      <div className="mt-8"><RelatedProducts/>      
       </div>
     </div>
-  );
-}
+  )};

@@ -1,4 +1,4 @@
-import "./App.css";
+import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <Router>
+      <Router>
       <div className="font-sans">
         <Header />
 
@@ -20,12 +20,11 @@ function App() {
           <Route path="/category/:categoryId" element={<CategoryProducts />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          
         </Routes>
-
         <Footer />
       </div>
-    </Router>
+      </Router>
   );
 }
-
 export default App;

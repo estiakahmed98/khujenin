@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import AdminService from "../../firebase/adminService";
+import Sidebar from "../../components/Admin/Sidebar";
+import Header from "../../components/Admin/Header";
 
 const ManageCategories = () => {
   const [categories, setCategories] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [activeSection, setActiveSection] = useState('categories');
   const adminService = new AdminService();
 
   const handleCreateCategory = async (e) => {
@@ -64,105 +67,121 @@ const ManageCategories = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Manage Categories</h1>
-
-      <form
-        onSubmit={
-          selectedCategory ? handleUpdateCategory : handleCreateCategory
-        }
-        className="mb-4"
-      >
-        <label className="block mb-2">
-          Category Name:
-          <input
-            type="text"
-            value={categoryName}
-            onChange={(e) => setCategoryName(e.target.value)}
-            className="border p-2 w-full"
-          />
-        </label>
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          {selectedCategory ? "Update Category" : "Create Category"}
-        </button>
-      </form>
-
-      <table className="w-full">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="p-2">ID</th>
-            <th className="p-2">Name</th>
-            <th className="p-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categories.map((category) => (
-            <tr key={category.id} className="border-b">
-              <td className="p-2">{category.id}</td>
-              <td className="p-2">{category.name}</td>
-              <td className="p-2">
-                <button
-                  onClick={() => {
-                    handleGetCategory(category.id);
-                  }}
-                  className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded mr-2"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={() => handleDeleteCategory(category.id)}
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {showModal && selectedCategory && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-          <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-            <div className="mt-3">
-              <h4 className="text-lg font-medium text-gray-800">
-                Update Category
-              </h4>
-              <form onSubmit={handleUpdateCategory} className="mt-4">
-                <div className="mb-4">
-                  <label className="block mb-2">
-                    Category Name:
-                    <input
-                      type="text"
-                      value={categoryName}
-                      onChange={(e) => setCategoryName(e.target.value)}
-                      className="border p-2 w-full"
-                    />
-                  </label>
-                </div>
-                <div className="flex justify-end">
-                  <button
-                    type="button"
-                    onClick={toggleModal}
-                    className="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded mr-2"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  >
-                    Update
-                  </button>
-                </div>
-              </form>
-            </div>
+    <div className="flex h-screen bg-gray-100">
+      <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
+      
+      <div className="flex-1 overflow-auto">
+        <Header activeSection={activeSection} />
+        
+        <div className="p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-3xl font-semibold">Manage Categories</h1>
+            <button
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              onClick={toggleModal}
+            >
+              Add Category
+            </button>
           </div>
+
+          <form
+            onSubmit={
+              selectedCategory ? handleUpdateCategory : handleCreateCategory
+            }
+            className="mb-4"
+          >
+            <label className="block mb-2">
+              Category Name:
+              <input
+                type="text"
+                value={categoryName}
+                onChange={(e) => setCategoryName(e.target.value)}
+                className="border p-2 w-full"
+              />
+            </label>
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              {selectedCategory ? "Update Category" : "Create Category"}
+            </button>
+          </form>
+
+          <table className="w-full">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="p-2">ID</th>
+                <th className="p-2">Name</th>
+                <th className="p-2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {categories.map((category) => (
+                <tr key={category.id} className="border-b">
+                  <td className="p-2">{category.id}</td>
+                  <td className="p-2">{category.name}</td>
+                  <td className="p-2">
+                    <button
+                      onClick={() => {
+                        handleGetCategory(category.id);
+                      }}
+                      className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded mr-2"
+                    >
+                      Update
+                    </button>
+                    <button
+                      onClick={() => handleDeleteCategory(category.id)}
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {showModal && selectedCategory && (
+            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+              <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                <div className="mt-3">
+                  <h4 className="text-lg font-medium text-gray-800">
+                    Update Category
+                  </h4>
+                  <form onSubmit={handleUpdateCategory} className="mt-4">
+                    <div className="mb-4">
+                      <label className="block mb-2">
+                        Category Name:
+                        <input
+                          type="text"
+                          value={categoryName}
+                          onChange={(e) => setCategoryName(e.target.value)}
+                          className="border p-2 w-full"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex justify-end">
+                      <button
+                        type="button"
+                        onClick={toggleModal}
+                        className="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded mr-2"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

@@ -16,14 +16,14 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [settings, setSettings] = useState(null);
   const revalidator = useRevalidator();
-  
+
   // Fetch settings on component mount and when revalidation occurs
   useEffect(() => {
     const fetchSettings = async () => {
       try {
         const settingsRef = doc(db, "settings", "global");
         const settingsSnapshot = await getDoc(settingsRef);
-        
+
         if (settingsSnapshot.exists()) {
           setSettings(settingsSnapshot.data());
         }
@@ -31,7 +31,7 @@ const Navbar = () => {
         console.error("Error fetching settings:", error);
       }
     };
-    
+
     fetchSettings();
   }, [revalidator.state]); // Re-fetch when revalidator state changes
 
@@ -44,47 +44,61 @@ const Navbar = () => {
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-3">
             <span className="sr-only">KhujeNin</span>
-            <img 
-              alt={settings?.logo_img_alt || "Brand logo"} 
-              src={settings?.logo_img || "/logoall.png"} 
-              className="h-14 w-auto" 
+            <img
+              alt={settings?.logo_img_alt || "Brand logo"}
+              src={settings?.logo_img || "/logoall.png"}
+              className="h-14 w-auto"
             />
             <p className="text-2xl font-bold text-green-800">KhujeNin</p>
           </Link>
         </div>
-        <div className="flex lg:hidden">
+
+        {/* Call for Ad button - Always visible on both mobile and desktop */}
+        <div className="flex items-center">
+          <a
+            href="https://wa.me/8801616367606?text=Hello%21%20I%20want%20to%20Promotion%20my%20products"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1 text-green-800 text-base font-semibold hover:text-green-600 border border-green-800 hover:border-green-600 transition-colors duration-200 mr-4"
+          >
+            <img src="/whatsapp.png" alt="whatsapp" className="h-6" />
+            <span className="hidden sm:inline">Call for Ad</span>
+          </a>
+
+          {/* Hamburger menu button - Mobile only */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            className="lg:hidden -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
           >
             <span className="sr-only">Open main menu</span>
             <Bars3Icon aria-hidden="true" className="size-6" />
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-12">
+
+        {/* Desktop navigation */}
+        <div className="hidden lg:flex lg:gap-x-8">
           {navigation.map((item) => (
             <NavLink
               key={item.name}
               to={item.href}
-              className="font-medium  text-gray-900"
+              className="font-medium text-gray-900"
             >
               {item.name}
             </NavLink>
           ))}
-        </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a
-            href="https://wa.me/8801616367606?text=Hello%21%20I%20want%20to%20Promotion%20my%20products"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-green-800 text-lg font-semibold hover:text-green-600 border border-green-800 hover:border-green-600 transition-colors duration-200"
+
+          {/* Sign In button - Desktop only */}
+          <NavLink
+            to="/admin"
+            className="font-medium bg-green-800 hover:bg-green-600 text-white rounded-lg px-4 py-2 transition-colors duration-200"
           >
-            <img src="/whatsapp.png" alt="whatsapp" className="h-8" />
-            Call for Ad
-          </a>
+            Sign In
+          </NavLink>
         </div>
       </nav>
+
+      {/* Mobile menu dialog */}
       <Dialog
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
@@ -94,7 +108,7 @@ const Navbar = () => {
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">KhujeNin</span>
               <img
                 alt={settings?.logo_img_alt || "Brand logo"}
                 src={settings?.logo_img || "/logoall.png"}
@@ -114,6 +128,7 @@ const Navbar = () => {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
+                {/* Mobile navigation items */}
                 {navigation.map((item) => (
                   <NavLink
                     key={item.name}
@@ -123,12 +138,22 @@ const Navbar = () => {
                     {item.name}
                   </NavLink>
                 ))}
-                <div>
+
+                {/* Sign In link - Mobile */}
+                <NavLink
+                  to="/admin"
+                  className="-mx-3 block  text-base/7 font-semibold bg-green-800 hover:bg-green-600 text-white rounded-lg px-4 py-2 transition-colors duration-200"
+                >
+                  Sign In
+                </NavLink>
+
+                {/* Call for Ad - Mobile (full width) */}
+                <div className="mt-4">
                   <a
                     href="https://wa.me/8801616367606?text=Hello%21%20I%20want%20to%20Promotion%20my%20products"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-green-800 text-lg font-semibold hover:text-green-600 border border-green-800 hover:border-green-600 transition-colors duration-200"
+                    className="inline-flex items-center justify-center w-full gap-2 rounded-lg bg-white px-4 py-2 text-green-800 text-lg font-semibold hover:text-green-600 border border-green-800 hover:border-green-600 transition-colors duration-200"
                   >
                     <img src="/whatsapp.png" alt="whatsapp" className="h-8" />
                     Call for Ad

@@ -61,8 +61,7 @@ const Navbar = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1 text-green-800 text-base font-semibold hover:text-green-600 border border-green-800 hover:border-green-600 transition-colors duration-200 mr-4"
           >
-            <img src="/whatsapp.png" alt="whatsapp" className="h-6" />
-            <span className="hidden sm:inline">Call for Ad</span>
+            <p>Call for Ad</p>
           </a>
 
           {/* Hamburger menu button - Mobile only */}
@@ -155,7 +154,6 @@ const Navbar = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center w-full gap-2 rounded-lg bg-white px-4 py-2 text-green-800 text-lg font-semibold hover:text-green-600 border border-green-800 hover:border-green-600 transition-colors duration-200"
                   >
-                    <img src="/whatsapp.png" alt="whatsapp" className="h-8" />
                     Call for Ad
                   </a>
                 </div>

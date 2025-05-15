@@ -26,26 +26,32 @@ const AboutPage = () => {
             />
           </div>
 
-          {/* Right Column - Story */}
-          <div className="flex flex-col justify-center">
-            <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
-              বিক্রি করতে চান?
-            </h3>
-            <p className="text-gray-600 mb-4">
-              আপনার ফুড আইটেম পণ্য বিক্রি করতে বিনামূল্যে বিজ্ঞাপন পোস্ট করুন।
-              দ্রুত আপলোড হয়ে যাবে। আপনার যদি বিক্রির জন্য অনেক পণ্য থাকে তাহলে{" "}
-              <strong>মেম্বারশিপ</strong> নিন এবং দারুন কিছু সুবিধা উপভোগ করুন।
-            </p>
+          <div className="flex flex-col justify-center space-y-6">
+            <div>
+              <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">
+                বিক্রি করতে চান?
+              </h3>
+              <p className="text-gray-600">
+                আপনার ফুড আইটেম পণ্য বিক্রি করতে বিনামূল্যে বিজ্ঞাপন পোস্ট করুন।
+                দ্রুত আপলোড হয়ে যাবে। আপনার যদি বিক্রির জন্য অনেক পণ্য থাকে
+                তাহলে <strong>মেম্বারশিপ</strong> নিন এবং দারুন কিছু সুবিধা
+                উপভোগ করুন।
+              </p>
+            </div>
 
-            <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
-              কিছু কিনতে চান?
-            </h3>
-            <p className="text-gray-600">
-              Khujenin এ রয়েছে সারা বাংলাদেশ থেকে বিখ্যাত সব ফুড পণ্যের কালেকশন।
-              হোমমেড ফুড থেকে শুরু করে আচার, মিষ্টি, দই, রসমালাই, ফুড
-              সাপ্লিমেন্টারী সহ এমনকি আপনার কাঙ্খিত শখের চিড়ার মোয়াটিও খুঁজে
-              পাবেন।
-            </p>
+            <div>
+              <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">
+                কিছু কিনতে চান?
+              </h3>
+              <p className="text-gray-600">
+                Khujenin এ রয়েছে সারা বাংলাদেশ থেকে বিখ্যাত সব ফুড পণ্যের
+                কালেকশন। হোমমেড ফুড থেকে শুরু করে আচার, মিষ্টি, দই, রসমালাই, ফুড
+                সাপ্লিমেন্টারী সহ এমনকি আপনার কাঙ্খিত শখের চিড়ার মোয়াটিও খুঁজে
+                পাবেন। ফুড আইটেমের প্রয়োজনীয় টুলস যেমন চামিচ, বাটি, ওয়ান টাইম
+                প্লেট, ফুড কালার, ভিনেগার, টক দই ইত্যাদি খুঁজে পেতেও Khujenin
+                আপনাকে সহায়তা করবে।
+              </p>
+            </div>
           </div>
         </div>
 
@@ -54,9 +60,7 @@ const AboutPage = () => {
           <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-8 text-center">
             আমরা যেটাতে বিশ্বাস করি
           </h3>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Value 1 */}
             <div className="bg-gray-50 p-6 rounded-lg">
               <div className="flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-full mb-4 mx-auto">
                 <FaLeaf className="text-yellow-500 w-6 h-6" />
@@ -69,8 +73,6 @@ const AboutPage = () => {
                 প্রত্যেকটি পণ্য পরিবেশের জন্য নিরাপদ হয়।
               </p>
             </div>
-
-            {/* Value 2 */}
             <div className="bg-gray-50 p-6 rounded-lg">
               <div className="flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-full mb-4 mx-auto">
                 <FaAward className="text-yellow-500 w-6 h-6" />
@@ -83,8 +85,6 @@ const AboutPage = () => {
                 হয়, যাতে আপনি সেরা মানের পণ্য পান।
               </p>
             </div>
-
-            {/* Value 3 */}
             <div className="bg-gray-50 p-6 rounded-lg">
               <div className="flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-full mb-4 mx-auto">
                 <IoMdPeople className="text-yellow-500 w-6 h-6" />
@@ -98,6 +98,33 @@ const AboutPage = () => {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Safety Tips */}
+        <div className="mb-16">
+          <h3 className="text-xl md:text-2xl font-semibold text-red-700 mb-4">
+            নিরাপদ কেনাবেচা নিশ্চিত করতে করণীয়:
+          </h3>
+          <ul className="list-disc pl-6 text-gray-700 space-y-2 text-sm leading-relaxed">
+            <li>
+              সম্ভব হলে বিক্রেতার সাথে সরাসরি দেখা করুন এবং পণ্য যাচাই করুন।
+            </li>
+            <li>ক্রেতারা পণ্য হাতে পেয়ে তারপর পেমেন্ট করুন।</li>
+            <li>বিক্রেতারা দূরে পণ্য পাঠাতে হলে পেমেন্ট পাওয়ার পর পাঠান।</li>
+            <li>অস্বাভাবিক কম দাম বা দ্রুত অর্থের প্রতিশ্রুতি এড়িয়ে চলুন।</li>
+            <li>ব্যাংক বা মোবাইল পেমেন্ট তথ্য কাউকে প্রদান করবেন না।</li>
+            <li>
+              Khujenin কোনও ধরনের পেমেন্ট গ্যারান্টি বা নিরাপত্তা প্রদান করে না।
+            </li>
+            <li>
+              Khujenin কখনও ইমেইলে ব্যক্তিগত তথ্য চায় না। সন্দেহজনক ইমেইল
+              রিপোর্ট করুন।
+            </li>
+            <li>অতিরিক্ত ফি বা দালাল দাবি করলে তা এড়িয়ে চলুন।</li>
+            <li>
+              প্রতারিত হলে নিকটস্থ থানায় যোগাযোগ করুন। Khujenin দায়ভার নেবে না।
+            </li>
+          </ul>
         </div>
 
         {/* CTA */}

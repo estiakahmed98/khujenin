@@ -53,15 +53,15 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Call for Ad button - Always visible on both mobile and desktop */}
-        <div className="flex items-center">
+        {/* বিজ্ঞাপন দিন button - Always visible on both mobile and desktop */}
+        <div className="flex items-center ">
           <a
-            href="https://wa.me/8801616367606?text=Hello%21%20I%20want%20to%20Promotion%20my%20products"
+            href="https://wa.me/8801303284774?text=Hello%21%20I%20want%20to%20Promotion%20my%20products"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1 text-green-800 text-base font-semibold hover:text-green-600 border border-green-800 hover:border-green-600 transition-colors duration-200 mr-4"
+            className="bg-red-700 text-white py-2 px-4 mr-3 rounded-xl"
           >
-            <p>Call for Ad</p>
+            বিজ্ঞাপন দিন
           </a>
 
           {/* Hamburger menu button - Mobile only */}
@@ -76,7 +76,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop navigation */}
-        <div className="hidden lg:flex lg:gap-x-8">
+        <div className="hidden lg:flex lg:gap-x-8 lg:items-center">
           {navigation.map((item) => (
             <NavLink
               key={item.name}
@@ -146,15 +146,15 @@ const Navbar = () => {
                   Sign In
                 </NavLink>
 
-                {/* Call for Ad - Mobile (full width) */}
+                {/* বিজ্ঞাপন দিন - Mobile (full width) */}
                 <div className="mt-4">
                   <a
-                    href="https://wa.me/8801616367606?text=Hello%21%20I%20want%20to%20Promotion%20my%20products"
+                    href="https://wa.me/8801303284774?text=Hello%21%20I%20want%20to%20Promotion%20my%20products"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center w-full gap-2 rounded-lg bg-white px-4 py-2 text-green-800 text-lg font-semibold hover:text-green-600 border border-green-800 hover:border-green-600 transition-colors duration-200"
                   >
-                    Call for Ad
+                    বিজ্ঞাপন দিন
                   </a>
                 </div>
               </div>

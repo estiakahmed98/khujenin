@@ -183,7 +183,7 @@ const ContactPage = () => {
               <SlCallOut className="h-10 w-10" />
               <div>
                 <h4 className="text-gray-900 font-semibold">Phone Number</h4>
-                <p className="mt-1 text-gray-600">+8801616367606</p>
+                <p className="mt-1 text-gray-600">+8801303284774</p>
               </div>
             </div>
           </div>

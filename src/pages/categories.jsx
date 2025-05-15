@@ -240,7 +240,8 @@ export default function CategoriesPage() {
                       </div>
                       <div className="mt-4 flex items-center justify-between">
                         <p className="text-base font-medium text-gray-900">
-                          {parseFloat(product.price).toFixed(2)} ৳
+                          {parseFloat(product.price).toFixed(2)} ৳ আলোচনা
+                          সাপেক্ষ
                         </p>
                         {product.quantity <= 5 && product.quantity > 0 && (
                           <span className="inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800">

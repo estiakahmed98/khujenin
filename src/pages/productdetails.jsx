@@ -127,7 +127,7 @@ export default function ProductDetails() {
             <div className="mt-3">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-                {parseFloat(product?.price || 0).toFixed(2)} ৳
+                {parseFloat(product?.price || 0).toFixed(2)} ৳ আলোচনা সাপেক্ষ
               </p>
             </div>
 

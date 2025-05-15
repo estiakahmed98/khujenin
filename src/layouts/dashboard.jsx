@@ -23,6 +23,7 @@ import {
   GlobeAltIcon,
   CogIcon,
 } from "@heroicons/react/24/outline";
+
 import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
@@ -59,6 +60,11 @@ const navigationItems = [
     href: "/dashboard/settings",
     icon: CogIcon,
   },
+  {
+    name: "Landing Page",
+    href: "/",
+    icon: HomeIcon,
+  },
 ];
 
 const userNavigation = [
@@ -73,23 +79,23 @@ const DashboardLayout = () => {
   const [settings, setSettings] = useState(null);
   const navigate = useNavigate();
   const revalidator = useRevalidator();
-  
+
   // Monitor auth state changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
     });
-    
+
     return () => unsubscribe();
   }, []);
-  
+
   // Fetch settings on component mount and when revalidation occurs
   useEffect(() => {
     const fetchSettings = async () => {
       try {
         const settingsRef = doc(db, "settings", "global");
         const settingsSnapshot = await getDoc(settingsRef);
-        
+
         if (settingsSnapshot.exists()) {
           setSettings(settingsSnapshot.data());
         }
@@ -97,10 +103,10 @@ const DashboardLayout = () => {
         console.error("Error fetching settings:", error);
       }
     };
-    
+
     fetchSettings();
   }, [revalidator.state]); // Re-fetch when revalidator state changes
-  
+
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -109,7 +115,7 @@ const DashboardLayout = () => {
       console.error("Error signing out:", error);
     }
   };
-  
+
   const handleOpenProfileModal = () => {
     setProfileModalOpen(true);
   };
@@ -161,9 +167,11 @@ const DashboardLayout = () => {
                       {navigationItems.map((item) => (
                         <li key={item.name}>
                           {item.collapsible ? (
-                            <Collapsible 
-                              label={item.name} 
-                              icon={<item.icon className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />}
+                            <Collapsible
+                              label={item.name}
+                              icon={
+                                <item.icon className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />
+                              }
                             >
                               <ul className="pl-8 mt-0.5">
                                 {item.children.map((child) => (
@@ -243,9 +251,11 @@ const DashboardLayout = () => {
                   {navigationItems.map((item) => (
                     <li key={item.name}>
                       {item.collapsible ? (
-                        <Collapsible 
-                          label={item.name} 
-                          icon={<item.icon className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />}
+                        <Collapsible
+                          label={item.name}
+                          icon={
+                            <item.icon className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />
+                          }
                         >
                           <ul className="pl-8 mt-0.5">
                             {item.children.map((child) => (
@@ -359,7 +369,10 @@ const DashboardLayout = () => {
                       className="size-8 rounded-full bg-gray-50 object-cover"
                       onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = "https://ui-avatars.com/api/?name=" + (currentUser.displayName || "User") + "&background=0D8ABC&color=fff";
+                        e.target.src =
+                          "https://ui-avatars.com/api/?name=" +
+                          (currentUser.displayName || "User") +
+                          "&background=0D8ABC&color=fff";
                       }}
                     />
                   ) : (
@@ -411,16 +424,16 @@ const DashboardLayout = () => {
 
         <main className="py-10">
           <div className="px-4 sm:px-6 lg:px-8">
-              <Outlet />
+            <Outlet />
           </div>
         </main>
       </div>
-      
+
       {/* Profile Modal */}
-      <ProfileModal 
-        isOpen={profileModalOpen} 
-        onClose={() => setProfileModalOpen(false)} 
-        user={currentUser} 
+      <ProfileModal
+        isOpen={profileModalOpen}
+        onClose={() => setProfileModalOpen(false)}
+        user={currentUser}
       />
     </div>
   );

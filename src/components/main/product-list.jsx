@@ -65,7 +65,7 @@ export default function ProductList() {
                   </Link>
                 </h3>
                 <p className="mt-1 text-sm font-medium text-gray-900">
-                  {parseFloat(product.price).toFixed(2)} ৳
+                  {parseFloat(product.price).toFixed(2)} ৳ আলোচনা সাপেক্ষ
                 </p>
               </div>
             ))}

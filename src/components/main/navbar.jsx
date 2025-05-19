@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, NavLink, useRevalidator } from "react-router";
 import { doc, getDoc } from "firebase/firestore/lite";
 import { db } from "@/lib/firebase";
+import { useLocation } from "react-router";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -16,6 +17,11 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [settings, setSettings] = useState(null);
   const revalidator = useRevalidator();
+  const path = useLocation().pathname;
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [path]);
 
   // Fetch settings on component mount and when revalidation occurs
   useEffect(() => {
